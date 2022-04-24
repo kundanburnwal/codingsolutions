@@ -1,7 +1,4 @@
-/**
- * 
- */
-package com.intuit.kundan;
+package com.kundan.algopractice;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +13,7 @@ Example :
 
 Input : [2, 1, 2]
 Return  : 2 which occurs 2 times which is greater than 3/2. 
- * @author smrit
+ * @author kburnwal
  *
  */
 public class MajorityElement {
