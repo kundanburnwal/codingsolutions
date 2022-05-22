@@ -1,9 +1,13 @@
 package com.kundan.algopractice;
 
+import java.util.AbstractMap;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -44,26 +48,20 @@ public class LongestSubstringWithoutRepeating {
 
 	private int longestNonRepeatingSubsequence(String input) {
 		//length, subsequence
-		Map<Integer, String> subsequences = new TreeMap<>(Comparator.reverseOrder());
-		
+		Comparator<Entry<Integer, String>> comparator = Comparator.comparing(Map.Entry<Integer, String>::getKey).reversed();
+		PriorityQueue<Map.Entry<Integer,String>> sortedSubsequences = new PriorityQueue<>(comparator);
 		for (int i=0; i<input.length();i++) {
 			int j=i;
 			while (j < input.length()-1 && input.charAt(j)!=input.charAt(j+1)) {
-				System.out.println("i="+i+" j="+j+" comparing j,j+1 ("+input.charAt(j)+","+input.charAt(j+1)+")");
 				j++;
 			}
 			String subseq = input.substring(i, j+1);
 			int len = subseq.length();
 			System.out.println("subseq="+subseq+" len="+len+" i="+i+" j="+j);
-			subsequences.put(len, subseq);
+			SimpleEntry<Integer, String> entry = new SimpleEntry<Integer, String>(len, subseq);
+			sortedSubsequences.add(entry);
 			i=j;
 		}
-		
-		for (Iterator<Integer> iter = subsequences.keySet().iterator(); iter.hasNext();) {
-			Integer index = iter.next();
-			System.out.println("longest subseq="+subsequences.get(index)+" len="+index);
-			return index;
-		}
-		return 0;
+		return sortedSubsequences.remove().getKey();
 	}
 }
