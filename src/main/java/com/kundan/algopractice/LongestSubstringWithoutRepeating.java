@@ -51,10 +51,11 @@ public class LongestSubstringWithoutRepeating {
 		Comparator<Entry<Integer, String>> comparator = Comparator.comparing(Map.Entry<Integer, String>::getKey).reversed();
 		PriorityQueue<Map.Entry<Integer,String>> sortedSubsequences = new PriorityQueue<>(comparator);
 		for (int i=0; i<input.length();i++) {
-			int j=i;
-			while (j < input.length()-1 && input.charAt(j)!=input.charAt(j+1)) {
-				j++;
-			}
+			
+			int j=0;
+			
+			for (j=i; j<input.length()-1 && input.charAt(j)!=input.charAt(j+1); j++);
+			
 			String subseq = input.substring(i, j+1);
 			int len = subseq.length();
 			System.out.println("subseq="+subseq+" len="+len+" i="+i+" j="+j);
