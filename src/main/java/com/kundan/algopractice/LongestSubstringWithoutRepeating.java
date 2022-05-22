@@ -1,15 +1,8 @@
 package com.kundan.algopractice;
 
-import java.util.AbstractMap;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.PriorityQueue;
-import java.util.Set;
-import java.util.TreeMap;
 
 /**
  * https://leetcode.com/problems/longest-substring-without-repeating-characters/
@@ -40,7 +33,7 @@ s consists of English letters, digits, symbols and spaces.
 public class LongestSubstringWithoutRepeating {
 	
 	public static void main(String[] args) {
-		String input = "pwwwkew";
+		String input = "pwwkew";//"abcabcbb";
 		System.out.println("input="+input);
 		int output = new LongestSubstringWithoutRepeating().longestNonRepeatingSubsequence(input);
 		System.out.println("longest substring non-repeating="+output);
@@ -48,21 +41,24 @@ public class LongestSubstringWithoutRepeating {
 
 	private int longestNonRepeatingSubsequence(String input) {
 		//length, subsequence
-		Comparator<Entry<Integer, String>> comparator = Comparator.comparing(Map.Entry<Integer, String>::getKey).reversed();
-		PriorityQueue<Map.Entry<Integer,String>> sortedSubsequences = new PriorityQueue<>(comparator);
+		Comparator<SimpleEntry<Integer, String>> comparator = Comparator.comparing(SimpleEntry<Integer, String>::getKey).reversed();
+		PriorityQueue<SimpleEntry<Integer,String>> sortedSubsequences = new PriorityQueue<>(comparator);
 		for (int i=0; i<input.length();i++) {
 			
-			int j=0;
+			int j=i;
 			
-			for (j=i; j<input.length()-1 && input.charAt(j)!=input.charAt(j+1); j++);
+			for (j=i; (j<(input.length()-1) && input.charAt(j)!=input.charAt(j+1) && !input.substring(i, j+1).contains(""+input.charAt(j+1))); ) {
+				j++;
+			}
 			
 			String subseq = input.substring(i, j+1);
-			int len = subseq.length();
-			System.out.println("subseq="+subseq+" len="+len+" i="+i+" j="+j);
-			SimpleEntry<Integer, String> entry = new SimpleEntry<Integer, String>(len, subseq);
+			System.out.println(" -- each subseq="+subseq+" len="+subseq.length()+" i="+i+" j="+j);
+			SimpleEntry<Integer, String> entry = new SimpleEntry<Integer, String>(subseq.length(), subseq);
 			sortedSubsequences.add(entry);
 			i=j;
 		}
-		return sortedSubsequences.remove().getKey();
+		SimpleEntry<Integer, String> maxEntry = sortedSubsequences.remove();
+        System.out.println("Longest subseq="+maxEntry.getValue()+" len="+maxEntry.getKey());
+		return maxEntry.getKey();
 	}
 }
