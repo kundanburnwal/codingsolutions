@@ -33,32 +33,32 @@ s consists of English letters, digits, symbols and spaces.
 public class LongestSubstringWithoutRepeating {
 	
 	public static void main(String[] args) {
-		String input = "pwwkew";//"abcabcbb";
+		String input = "abcabcbb";//"dvdf";// "pwwkew";//"abcabcbb";
 		System.out.println("input="+input);
 		int output = new LongestSubstringWithoutRepeating().longestNonRepeatingSubsequence(input);
 		System.out.println("longest substring non-repeating="+output);
 	}
 
 	private int longestNonRepeatingSubsequence(String input) {
+		if (input == null || input.length() < 1) {
+			return 0;
+		}
 		//length, subsequence
 		Comparator<SimpleEntry<Integer, String>> comparator = Comparator.comparing(SimpleEntry<Integer, String>::getKey).reversed();
 		PriorityQueue<SimpleEntry<Integer,String>> sortedSubsequences = new PriorityQueue<>(comparator);
 		for (int i=0; i<input.length();i++) {
-			
 			int j=i;
-			
 			for (j=i; (j<(input.length()-1) && input.charAt(j)!=input.charAt(j+1) && !input.substring(i, j+1).contains(""+input.charAt(j+1))); ) {
 				j++;
 			}
-			
 			String subseq = input.substring(i, j+1);
 			System.out.println(" -- each subseq="+subseq+" len="+subseq.length()+" i="+i+" j="+j);
 			SimpleEntry<Integer, String> entry = new SimpleEntry<Integer, String>(subseq.length(), subseq);
 			sortedSubsequences.add(entry);
-			i=j;
 		}
 		SimpleEntry<Integer, String> maxEntry = sortedSubsequences.remove();
         System.out.println("Longest subseq="+maxEntry.getValue()+" len="+maxEntry.getKey());
 		return maxEntry.getKey();
+		
 	}
 }
