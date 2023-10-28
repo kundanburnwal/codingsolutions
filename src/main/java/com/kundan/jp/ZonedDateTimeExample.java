@@ -1,4 +1,4 @@
-package com.kundan.javapractice;
+package com.kundan.jp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;

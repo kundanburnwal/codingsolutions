@@ -1,4 +1,4 @@
-package com.kundan.threadspractice;
+package com.kundan.tp;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;

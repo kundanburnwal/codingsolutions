@@ -1,4 +1,4 @@
-package com.kundan.algopractice;
+package com.kundan.ap;
 
 public abstract class SortAlgorithm {
 

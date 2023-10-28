@@ -1,4 +1,4 @@
-package com.kundan.algopractice;
+package com.kundan.ap;
 /**
  * https://www.interviewbit.com/problems/gas-station/
  * Given two integer arrays A and B of size N.

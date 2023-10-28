@@ -1,4 +1,4 @@
-package com.kundan.algopractice;
+package com.kundan.ap;
 
 /**
  * https://leetcode.com/problems/add-two-numbers/

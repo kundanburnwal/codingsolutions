@@ -1,4 +1,4 @@
-package com.kundan.javapractice;
+package com.kundan.jp;
 import java.util.ArrayList;
 import java.util.List;
 

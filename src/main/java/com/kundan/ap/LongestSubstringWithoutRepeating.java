@@ -1,4 +1,4 @@
-package com.kundan.algopractice;
+package com.kundan.ap;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Comparator;
