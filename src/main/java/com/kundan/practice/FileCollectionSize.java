@@ -59,16 +59,24 @@ public class FileCollectionSize {
     public void listTopNFilesBySize(int N) {
         System.out.println("Top N files are: ");
         int size = files.size();
+        List<File> polledFiles = new ArrayList<>();
         for (int i=0; i<N && i< size; i++) {
-            System.out.println((i+1)+"."+files.poll());
+            File poll = files.poll();
+            System.out.println((i+1)+"."+ poll);
+            polledFiles.add(poll);
         }
+        polledFiles.stream().forEach(files::offer);
     }
     public void listTopNCollectionsBySize(int N) {
         System.out.println("Top N Collections are: ");
         int size = collections.size();
+        List<Collection> polledCollections = new ArrayList<>();
         for (int i=0; i<N && i< size; i++) {
-            System.out.println((i+1)+"."+collections.poll());
+            Collection poll = collections.poll();
+            System.out.println((i+1)+"."+ poll);
+            polledCollections.add(poll);
         }
+        polledCollections.stream().forEach(collections::offer);
     }
     public static void main(String[] args) {
 
